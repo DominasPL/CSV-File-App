@@ -2,14 +2,17 @@ package com.github.dominaspl.csvfileproject.controllers;
 
 import com.github.dominaspl.csvfileproject.services.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
 
     private UserService userService;
@@ -18,10 +21,24 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/upload-file")
     private String displayRegisterForm() {
 
         return "upload-file";
+    }
+
+    @GetMapping("/number-of-users")
+    public String displayNumberOfUsers(Model model) {
+
+        model.addAttribute("numberOfUsers", userService.getAllUsers().size());
+
+        return "number-of-users";
+    }
+
+    @GetMapping("/users-sorted-by-age")
+    public String displaySortedUsersByAge(Model model) {
+        model.addAttribute("users", userService.getAllUsers());
+        return "users-sorted-by-age";
     }
 
     @PostMapping
@@ -50,4 +67,6 @@ public class UserController {
 
         return data;
     }
+
+
 }

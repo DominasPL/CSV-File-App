@@ -1,6 +1,8 @@
 package com.github.dominaspl.csvfileproject.servicesimpl;
 
+import com.github.dominaspl.csvfileproject.converters.UserConverter;
 import com.github.dominaspl.csvfileproject.dtos.UserDTO;
+import com.github.dominaspl.csvfileproject.entities.User;
 import com.github.dominaspl.csvfileproject.repositories.UserRepository;
 import com.github.dominaspl.csvfileproject.services.UserService;
 import org.springframework.stereotype.Service;
@@ -30,9 +32,23 @@ public class UserServiceImpl implements UserService {
 
         List<String> userData = new ArrayList<>(Arrays.asList(usersStr.split("\n")));
 
-        List<UserDTO> users = setUsersData(convertUserData(userData));
+        List<UserDTO> userDTOS = setUsersData(convertUserData(userData));
 
+        for (UserDTO userDTO : userDTOS) {
+            userRepository.save(UserConverter.convertToUser(userDTO));
+        }
+    }
 
+    @Override
+    public List<UserDTO> getAllUsers() {
+
+        List<User> allUsers = userRepository.findAll();
+
+        if (allUsers == null) {
+            throw new IllegalStateException("Users not found!");
+        }
+
+        return UserConverter.convertToUserDTO(allUsers);
     }
 
     public LocalDate convertToLocalDate(String date) {
