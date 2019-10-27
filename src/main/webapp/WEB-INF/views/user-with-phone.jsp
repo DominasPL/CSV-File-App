@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: dominik
@@ -14,6 +15,33 @@
 <body>
 
     <h1>Oldest user with phone number</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Users</th>
+        </tr>
+        <tr>
+            <th>#</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+            <th>Phone number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${users}" var="user" varStatus="userStatus">
+            <tr>
+                <td>${userStatus.count}</td>
+                <td>${user.firstName}</td>
+                <td>${user.lastName}</td>
+                <td>${user.age}</td>
+                <td>${user.phoneNumber}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
 
+
+
+    </table>
 </body>
 </html>

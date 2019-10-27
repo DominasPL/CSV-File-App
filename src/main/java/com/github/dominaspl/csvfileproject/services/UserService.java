@@ -11,4 +11,6 @@ public interface UserService {
     List<UserDTO> getAllUsers();
 
     List<UserDTO> getSortedUsersByAge();
+
+    List<UserDTO> findOldestUserWithPhoneNumber();
 }

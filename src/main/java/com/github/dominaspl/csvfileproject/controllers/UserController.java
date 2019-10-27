@@ -43,7 +43,7 @@ public class UserController {
 
     @GetMapping("/oldest-user-with-phone")
     public String displayOldestUserWithPhoneNumber(Model model) {
-        model.addAttribute("user", userService.getAllUsers());
+        model.addAttribute("users", userService.findOldestUserWithPhoneNumber());
         return "user-with-phone";
     }
 

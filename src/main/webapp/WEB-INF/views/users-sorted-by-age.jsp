@@ -10,11 +10,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Sorted users</title>
+    <title>Oldest users</title>
 </head>
 <body>
 
-    <h1>Users sorted by age</h1>
+    <h1>Oldest users</h1>
     <table>
         <thead>
             <tr>
@@ -39,9 +39,6 @@
                </tr>
             </c:forEach>
         </tbody>
-
-
-
     </table>
 
 </body>

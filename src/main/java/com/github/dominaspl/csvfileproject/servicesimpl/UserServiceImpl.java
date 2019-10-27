@@ -70,6 +70,18 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
+    @Override
+    public List<UserDTO> findOldestUserWithPhoneNumber() {
+
+        List<User> users = userRepository.findOldestUserAndPhoneNumberIsNotNull();
+
+        if (users == null) {
+            throw new IllegalStateException("Users not found!");
+        }
+
+        return UserConverter.convertToUserDTO(users);
+    }
+
     public LocalDate convertToLocalDate(String date) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.M.d");
