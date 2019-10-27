@@ -96,6 +96,17 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+    @Override
+    public void deleteAllUsers() {
+
+        List<User> users = userRepository.findAll();
+        if (!users.isEmpty()) {
+            users
+                .forEach(user -> userRepository.delete(user));
+        }
+
+    }
+
     public LocalDate convertToLocalDate(String date) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.M.d");

@@ -39,10 +39,17 @@ public class UserController {
     }
 
     @GetMapping("/users-sorted-by-age/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long userId, Model model) {
+    public String deleteUser(@PathVariable("id") Long userId) {
 
         userService.deleteUser(userId);
         return "redirect:/users/users-sorted-by-age";
+    }
+
+    @GetMapping("/users-sorted-by-age/delete-users")
+    public String deleteUser() {
+
+        userService.deleteAllUsers();
+        return "redirect:/";
     }
 
     @GetMapping("/oldest-user-with-phone")

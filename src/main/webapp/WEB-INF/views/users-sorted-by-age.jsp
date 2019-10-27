@@ -43,5 +43,7 @@
         </tbody>
     </table>
 
+    <a href="/users/users-sorted-by-age/delete-users">Delete all users</a>
+
 </body>
 </html>
