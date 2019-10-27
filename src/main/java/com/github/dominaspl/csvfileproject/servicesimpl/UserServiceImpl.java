@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -80,6 +81,19 @@ public class UserServiceImpl implements UserService {
         }
 
         return UserConverter.convertToUserDTO(users);
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+
+        if (userId == null) {
+            throw new IllegalArgumentException("Id must be given!");
+        }
+
+        Optional<User> optionalUser = userRepository.findById(userId);
+        User user = optionalUser.orElseThrow(() -> new IllegalStateException("User not found"));
+
+        userRepository.delete(user);
     }
 
     public LocalDate convertToLocalDate(String date) {

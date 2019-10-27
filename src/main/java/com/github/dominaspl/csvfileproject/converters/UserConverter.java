@@ -23,6 +23,7 @@ public class UserConverter {
 
         for (User user : allUsers) {
             UserDTO userDTO = new UserDTO();
+            userDTO.setUserId(user.getUserId());
             userDTO.setFirstName(user.getFirstName());
             userDTO.setLastName(user.getLastName());
             userDTO.setBirthDate(user.getBirthDate());

@@ -10,11 +10,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Oldest users</title>
+    <title>The oldest users</title>
 </head>
 <body>
 
-    <h1>Oldest users</h1>
+    <h1>The oldest users</h1>
     <table>
         <thead>
             <tr>
@@ -26,6 +26,7 @@
                 <th>Last name</th>
                 <th>Age</th>
                 <th>Phone number</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
                    <td>${user.lastName}</td>
                    <td>${user.age}</td>
                    <td>${user.phoneNumber}</td>
+                   <td><a href="/users/users-sorted-by-age/delete/${user.userId}">delete</a></td>
                </tr>
             </c:forEach>
         </tbody>

@@ -13,4 +13,6 @@ public interface UserService {
     List<UserDTO> getSortedUsersByAge();
 
     List<UserDTO> findOldestUserWithPhoneNumber();
+
+    void deleteUser(Long userId);
 }

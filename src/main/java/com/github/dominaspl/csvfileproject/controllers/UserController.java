@@ -3,10 +3,7 @@ package com.github.dominaspl.csvfileproject.controllers;
 import com.github.dominaspl.csvfileproject.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -39,6 +36,13 @@ public class UserController {
     public String displaySortedUsersByAge(Model model) {
         model.addAttribute("users", userService.getSortedUsersByAge());
         return "users-sorted-by-age";
+    }
+
+    @GetMapping("/users-sorted-by-age/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long userId, Model model) {
+
+        userService.deleteUser(userId);
+        return "redirect:/users/users-sorted-by-age";
     }
 
     @GetMapping("/oldest-user-with-phone")

@@ -11,6 +11,8 @@ import java.time.LocalDate;
 @RequestMapping
 public class UserDTO {
 
+    private Long userId;
+
     @NotBlank
     private String firstName;
 
