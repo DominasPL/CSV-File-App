@@ -14,10 +14,10 @@
 <body>
 
     <h1>This is main page!</h1>
-    <a href="/upload-file">Upload file</a><br>
+    <a href="/users/upload-file">Upload file</a><br>
     <a href="/users/number-of-users">Number of users</a><br>
     <a href="/users/users-sorted-by-age">Users sorted by age</a><br>
-    <a href="/oldest-user">Oldest user with phone number</a><br>
+    <a href="/users/oldest-user-with-phone">Oldest user with phone number</a><br>
 
 </body>
 </html>

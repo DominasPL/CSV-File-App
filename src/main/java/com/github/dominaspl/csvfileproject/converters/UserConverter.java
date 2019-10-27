@@ -26,6 +26,7 @@ public class UserConverter {
             userDTO.setFirstName(user.getFirstName());
             userDTO.setLastName(user.getLastName());
             userDTO.setBirthDate(user.getBirthDate());
+            userDTO.setAge(AgeConverter.convertBirthToAge(user.getBirthDate()));
             userDTO.setPhoneNumber(user.getPhoneNumber());
             users.add(userDTO);
         }

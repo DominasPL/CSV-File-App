@@ -1,5 +1,6 @@
 package com.github.dominaspl.csvfileproject.servicesimpl;
 
+import com.github.dominaspl.csvfileproject.converters.AgeConverter;
 import com.github.dominaspl.csvfileproject.converters.UserConverter;
 import com.github.dominaspl.csvfileproject.dtos.UserDTO;
 import com.github.dominaspl.csvfileproject.entities.User;
@@ -51,6 +52,24 @@ public class UserServiceImpl implements UserService {
         return UserConverter.convertToUserDTO(allUsers);
     }
 
+    @Override
+    public List<UserDTO> getSortedUsersByAge() {
+
+        List<User> allUsers = userRepository.findAll();
+
+        if (allUsers == null) {
+            throw new IllegalStateException("Users not found!");
+        }
+
+        List<UserDTO> users = UserConverter.convertToUserDTO(allUsers);
+
+        users.sort((u1, u2) -> {
+            return u1.getAge().compareTo(u2.getAge());
+        });
+
+        return users;
+    }
+
     public LocalDate convertToLocalDate(String date) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.M.d");
@@ -86,6 +105,7 @@ public class UserServiceImpl implements UserService {
                 userDTO.setLastName(split[1]);
                 if (split[2].matches("\\d{4}\\.\\d{1,2}\\.\\d{1,2}")) {
                     userDTO.setBirthDate(convertToLocalDate(split[2]));
+                    userDTO.setAge(AgeConverter.convertBirthToAge(userDTO.getBirthDate()));
                 }
                 if (split.length > 3) {
                     if (split[3].matches("\\d{9}")) {
@@ -97,6 +117,5 @@ public class UserServiceImpl implements UserService {
         }
         return users;
     }
-
 
 }

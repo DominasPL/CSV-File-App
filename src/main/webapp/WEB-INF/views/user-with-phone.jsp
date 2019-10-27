@@ -1,19 +1,19 @@
 <%--
   Created by IntelliJ IDEA.
   User: dominik
-  Date: 10/26/19
-  Time: 11:06 PM
+  Date: 10/27/19
+  Time: 5:28 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Number of users</title>
+    <title>User</title>
 </head>
 <body>
 
-    <h1>Number of users</h1>
-    <p>There are: ${numberOfUsers} users added.</p>
+    <h1>Oldest user with phone number</h1>
+
 </body>
 </html>

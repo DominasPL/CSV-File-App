@@ -9,4 +9,6 @@ public interface UserService {
     void addUsers(String users);
 
     List<UserDTO> getAllUsers();
+
+    List<UserDTO> getSortedUsersByAge();
 }

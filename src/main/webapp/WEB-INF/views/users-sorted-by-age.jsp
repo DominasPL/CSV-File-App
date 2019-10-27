@@ -24,7 +24,7 @@
                 <th>#</th>
                 <th>First name</th>
                 <th>Last name</th>
-                <th>Birth date</th>
+                <th>Age</th>
                 <th>Phone number</th>
             </tr>
         </thead>
@@ -34,7 +34,7 @@
                    <td>${userStatus.count}</td>
                    <td>${user.firstName}</td>
                    <td>${user.lastName}</td>
-                   <td>${user.birthDate}</td>
+                   <td>${user.age}</td>
                    <td>${user.phoneNumber}</td>
                </tr>
             </c:forEach>

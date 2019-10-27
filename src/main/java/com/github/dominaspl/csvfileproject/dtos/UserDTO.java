@@ -20,6 +20,9 @@ public class UserDTO {
     @NotBlank
     private LocalDate birthDate;
 
+    @NotBlank
+    private Integer age;
+
     @Pattern(regexp = "\\d{9}")
     private String phoneNumber;
 

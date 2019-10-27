@@ -37,11 +37,17 @@ public class UserController {
 
     @GetMapping("/users-sorted-by-age")
     public String displaySortedUsersByAge(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("users", userService.getSortedUsersByAge());
         return "users-sorted-by-age";
     }
 
-    @PostMapping
+    @GetMapping("/oldest-user-with-phone")
+    public String displayOldestUserWithPhoneNumber(Model model) {
+        model.addAttribute("user", userService.getAllUsers());
+        return "user-with-phone";
+    }
+
+    @PostMapping("/upload-file")
     private String addUsersFromGivenFile(@RequestParam("file") MultipartFile file) {
 
         String data = convertFileToString(file);
