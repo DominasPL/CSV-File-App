@@ -18,6 +18,7 @@
     <a href="/users/number-of-users">Number of users</a><br>
     <a href="/users/users-sorted-by-age">Users sorted by age</a><br>
     <a href="/users/oldest-user-with-phone">The oldest user with phone number</a><br>
+    <a href="/users/user-data-by-name">Find user by name</a><br>
 
 </body>
 </html>

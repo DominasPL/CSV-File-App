@@ -58,6 +58,18 @@ public class UserController {
         return "user-with-phone";
     }
 
+    @GetMapping("/user-data-by-name")
+    public String displayUserNameForm() {
+
+        return "last-name-form";
+    }
+
+    @PostMapping("/user-data-by-name")
+    public String findUserByName(@RequestParam("last-name") String lastName, Model model) {
+        model.addAttribute("user", userService.findUserByName(lastName));
+        return "user-by-last-name";
+    }
+
     @PostMapping("/upload-file")
     private String addUsersFromGivenFile(@RequestParam("file") MultipartFile file) {
 

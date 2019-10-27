@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
             throw new IllegalStateException("Users not found!");
         }
 
-        return UserConverter.convertToUserDTO(allUsers);
+        return UserConverter.convertToUserDTOList(allUsers);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
             throw new IllegalStateException("Users not found!");
         }
 
-        List<UserDTO> users = UserConverter.convertToUserDTO(allUsers);
+        List<UserDTO> users = UserConverter.convertToUserDTOList(allUsers);
 
         users.sort((u1, u2) -> {
             return u1.getAge().compareTo(u2.getAge());
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
             throw new IllegalStateException("Users not found!");
         }
 
-        return UserConverter.convertToUserDTO(users);
+        return UserConverter.convertToUserDTOList(users);
     }
 
     @Override
@@ -105,6 +105,19 @@ public class UserServiceImpl implements UserService {
                 .forEach(user -> userRepository.delete(user));
         }
 
+    }
+
+    @Override
+    public UserDTO findUserByName(String lastName) {
+
+        if (lastName == null) {
+            throw new IllegalArgumentException("Last name must be given!");
+        }
+
+        Optional<User> optionalUser = userRepository.findByLastName(lastName);
+        User user = optionalUser.orElseThrow(() -> new IllegalStateException("User not found"));
+
+        return UserConverter.convertToUserDTO(user);
     }
 
     public LocalDate convertToLocalDate(String date) {

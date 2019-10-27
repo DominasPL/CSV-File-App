@@ -17,21 +17,29 @@ public class UserConverter {
         return user;
     }
 
-    public static List<UserDTO> convertToUserDTO(List<User> allUsers) {
+    public static List<UserDTO> convertToUserDTOList(List<User> allUsers) {
 
         List<UserDTO> users = new ArrayList<>();
 
         for (User user : allUsers) {
-            UserDTO userDTO = new UserDTO();
-            userDTO.setUserId(user.getUserId());
-            userDTO.setFirstName(user.getFirstName());
-            userDTO.setLastName(user.getLastName());
-            userDTO.setBirthDate(user.getBirthDate());
-            userDTO.setAge(AgeConverter.convertBirthToAge(user.getBirthDate()));
-            userDTO.setPhoneNumber(user.getPhoneNumber());
-            users.add(userDTO);
+            users.add(convertToUserDTO(user));
         }
 
         return users;
     }
+
+    public static UserDTO convertToUserDTO(User user) {
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserId(user.getUserId());
+        userDTO.setFirstName(user.getFirstName());
+        userDTO.setLastName(user.getLastName());
+        userDTO.setBirthDate(user.getBirthDate());
+        userDTO.setAge(AgeConverter.convertBirthToAge(user.getBirthDate()));
+        userDTO.setPhoneNumber(user.getPhoneNumber());
+
+        return userDTO;
+    }
+
+
 }
