@@ -24,6 +24,20 @@ public class UserController {
         return "upload-file";
     }
 
+    @PostMapping("/upload-file")
+    private String addUsersFromGivenFile(@RequestParam("file") MultipartFile file) {
+
+        if (file == null) {
+            throw new IllegalArgumentException("Incorrect file!");
+        }
+
+        if (file.getOriginalFilename().endsWith(".csv")) {
+            userService.addUsers(convertFileToString(file));
+        }
+
+        return "redirect:/";
+    }
+
     @GetMapping("/number-of-users")
     public String displayNumberOfUsers(Model model) {
 
@@ -70,19 +84,6 @@ public class UserController {
         return "user-by-last-name";
     }
 
-    @PostMapping("/upload-file")
-    private String addUsersFromGivenFile(@RequestParam("file") MultipartFile file) {
-
-        String data = convertFileToString(file);
-
-        if(data.isEmpty()) {
-            throw new IllegalStateException("Incorrect data given!");
-        }
-
-        userService.addUsers(data);
-
-        return "redirect:/";
-    }
 
     public String convertFileToString(MultipartFile file) {
 

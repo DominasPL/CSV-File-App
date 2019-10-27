@@ -149,23 +149,21 @@ public class UserServiceImpl implements UserService {
 
         for (String data : filteredData) {
             String[] split = data.split(";");
-            if (split.length > 2) {
+            if (split.length > 2 && split[2].matches("\\d{4}\\.\\d{1,2}\\.\\d{1,2}")) {
                 UserDTO userDTO = new UserDTO();
                 userDTO.setFirstName(split[0]);
                 userDTO.setLastName(split[1]);
-                if (split[2].matches("\\d{4}\\.\\d{1,2}\\.\\d{1,2}")) {
-                    userDTO.setBirthDate(convertToLocalDate(split[2]));
-                    userDTO.setAge(AgeConverter.convertBirthToAge(userDTO.getBirthDate()));
+                userDTO.setBirthDate(convertToLocalDate(split[2]));
+                userDTO.setAge(AgeConverter.convertBirthToAge(userDTO.getBirthDate()));
+                if (split.length > 3 && split[3].matches("\\d{9}")) {
+                    userDTO.setPhoneNumber(split[3]);
                 }
-                if (split.length > 3) {
-                    if (split[3].matches("\\d{9}")) {
-                        userDTO.setPhoneNumber(split[3]);
-                    }
-                }
+
                 users.add(userDTO);
             }
         }
         return users;
     }
+
 
 }
