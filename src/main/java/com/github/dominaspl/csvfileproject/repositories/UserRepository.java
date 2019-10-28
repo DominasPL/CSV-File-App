@@ -21,4 +21,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT * FROM users\n" +
             "ORDER BY birth_date DESC",nativeQuery = true)
     Page<User> findAllAndOrderedByBirthDate(PageRequest of);
+
+    User findByPhoneNumber(String phoneNumber);
 }

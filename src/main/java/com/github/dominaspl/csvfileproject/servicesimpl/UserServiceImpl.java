@@ -36,11 +36,7 @@ public class UserServiceImpl implements UserService {
 
         List<String> userData = new ArrayList<>(Arrays.asList(usersStr.split("\n")));
 
-        List<UserDTO> userDTOS = setUsersData(convertUserData(userData));
-
-        for (UserDTO userDTO : userDTOS) {
-            userRepository.save(UserConverter.convertToUser(userDTO));
-        }
+        setUsersData(userData);
     }
 
     @Override
@@ -139,9 +135,8 @@ public class UserServiceImpl implements UserService {
         return filteredData;
     }
 
-    public List<UserDTO> setUsersData(List<String> filteredData) {
+    public void setUsersData(List<String> filteredData) {
 
-        List<UserDTO> users = new ArrayList<>();
 
         for (String data : filteredData) {
             String[] split = data.split(";");
@@ -151,14 +146,19 @@ public class UserServiceImpl implements UserService {
                 userDTO.setLastName(split[1]);
                 userDTO.setBirthDate(convertToLocalDate(split[2]));
                 userDTO.setAge(AgeConverter.convertBirthToAge(userDTO.getBirthDate()));
-                if (split.length > 3 && split[3].matches("\\d{9}")) {
-                    userDTO.setPhoneNumber(split[3]);
+                if (split.length > 3 && split[3].matches("\\d{9}") && checkIsPhoneNumberAvailable(split[3])) {
+                        userDTO.setPhoneNumber(split[3]);
                 }
-
-                users.add(userDTO);
+                userRepository.save(UserConverter.convertToUser(userDTO));
             }
         }
-        return users;
+    }
+
+    public boolean checkIsPhoneNumberAvailable(String phoneNumber) {
+
+        User user = userRepository.findByPhoneNumber(phoneNumber);
+
+        return user == null;
     }
 
 

@@ -25,6 +25,7 @@ public class User {
     @Column(nullable = false)
     private LocalDate birthDate;
 
+    @Column(unique = true)
     private String phoneNumber;
 
 }
