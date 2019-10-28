@@ -39,6 +39,7 @@ public class UserController {
         return "redirect:/";
     }
 
+
     @GetMapping("/number-of-users")
     public String displayNumberOfUsers(Model model) {
 
@@ -48,8 +49,8 @@ public class UserController {
     }
 
     @GetMapping("/users-sorted-by-age")
-    public String displaySortedUsersByAge(Model model) {
-        model.addAttribute("users", userService.getSortedUsersByAge());
+    public String displaySortedUsersByAge(Model model, @RequestParam(defaultValue = "0") int page) {
+        model.addAttribute("users", userService.getSortedUsersByAge(page));
         return "users-sorted-by-age";
     }
 
@@ -69,17 +70,17 @@ public class UserController {
 
     @GetMapping("/oldest-user-with-phone")
     public String displayOldestUserWithPhoneNumber(Model model) {
-        model.addAttribute("users", userService.findOldestUserWithPhoneNumber());
+        model.addAttribute("user", userService.findOldestUserWithPhoneNumber());
         return "user-with-phone";
     }
 
-    @GetMapping("/user-data-by-name")
+    @GetMapping("/user-data-by-last-name")
     public String displayUserNameForm() {
 
         return "last-name-form";
     }
 
-    @PostMapping("/user-data-by-name")
+    @PostMapping("/user-data-by-last-name")
     public String findUserByName(@RequestParam("last-name") String lastName, Model model) {
         model.addAttribute("user", userService.findUserByName(lastName));
         return "user-by-last-name";

@@ -6,6 +6,8 @@ import com.github.dominaspl.csvfileproject.dtos.UserDTO;
 import com.github.dominaspl.csvfileproject.entities.User;
 import com.github.dominaspl.csvfileproject.repositories.UserRepository;
 import com.github.dominaspl.csvfileproject.services.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -54,33 +56,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getSortedUsersByAge() {
+    public Page<UserDTO> getSortedUsersByAge(int page) {
 
-        List<User> allUsers = userRepository.findAll();
-
-        if (allUsers == null) {
-            throw new IllegalStateException("Users not found!");
-        }
-
-        List<UserDTO> users = UserConverter.convertToUserDTOList(allUsers);
-
-        users.sort((u1, u2) -> {
-            return u1.getAge().compareTo(u2.getAge());
-        });
-
-        return users;
-    }
-
-    @Override
-    public List<UserDTO> findOldestUserWithPhoneNumber() {
-
-        List<User> users = userRepository.findOldestUserAndPhoneNumberIsNotNull();
+        Page<User> users = userRepository.findAllAndOrderedByBirthDate(PageRequest.of(page, 5));
 
         if (users == null) {
             throw new IllegalStateException("Users not found!");
         }
 
-        return UserConverter.convertToUserDTOList(users);
+        return users.map(user -> UserConverter.convertToUserDTO(user));
+    }
+
+    @Override
+    public UserDTO findOldestUserWithPhoneNumber() {
+
+        User user = userRepository.findOldestUserAndPhoneNumberIsNotNull();
+
+        if (user == null) {
+            throw new IllegalStateException("User not found!");
+        }
+
+        return UserConverter.convertToUserDTO(user);
     }
 
     @Override

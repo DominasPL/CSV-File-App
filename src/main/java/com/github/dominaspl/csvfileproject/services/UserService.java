@@ -1,6 +1,7 @@
 package com.github.dominaspl.csvfileproject.services;
 
 import com.github.dominaspl.csvfileproject.dtos.UserDTO;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -10,9 +11,9 @@ public interface UserService {
 
     List<UserDTO> getAllUsers();
 
-    List<UserDTO> getSortedUsersByAge();
+    Page<UserDTO> getSortedUsersByAge(int page);
 
-    List<UserDTO> findOldestUserWithPhoneNumber();
+    UserDTO findOldestUserWithPhoneNumber();
 
     void deleteUser(Long userId);
 

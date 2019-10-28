@@ -11,17 +11,18 @@
 <html>
 <head>
     <title>User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 <body>
 
-    <h1>Oldest user with phone number</h1>
+    <h1>The oldest user with phone number</h1>
     <table>
         <thead>
         <tr>
-            <th>Users</th>
+            <th>User</th>
         </tr>
         <tr>
-            <th>#</th>
             <th>First name</th>
             <th>Last name</th>
             <th>Age</th>
@@ -29,19 +30,17 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${users}" var="user" varStatus="userStatus">
             <tr>
-                <td>${userStatus.count}</td>
                 <td>${user.firstName}</td>
                 <td>${user.lastName}</td>
                 <td>${user.age}</td>
                 <td>${user.phoneNumber}</td>
             </tr>
-        </c:forEach>
         </tbody>
-
-
-
     </table>
+
+    <a class="btn btn-primary" href="/" role="button">Go back</a>
+
+
 </body>
 </html>
