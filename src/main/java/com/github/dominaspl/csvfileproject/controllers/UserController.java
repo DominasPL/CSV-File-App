@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
@@ -26,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/upload-file")
-    private String addUsersFromGivenFile(@Valid @RequestParam("file") MultipartFile file) {
+    private String addUsersFromGivenFile(@RequestParam("file") MultipartFile file) {
 
         if (file == null) {
             throw new IllegalArgumentException("File must be given!");

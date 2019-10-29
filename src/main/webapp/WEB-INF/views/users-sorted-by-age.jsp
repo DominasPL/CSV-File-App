@@ -12,6 +12,8 @@
 <head>
     <title>Sorted users by age</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/media/css/style.css">
+
 </head>
 <body>
 
@@ -21,7 +23,7 @@
             <table>
                 <thead>
                 <tr>
-                    <th>Users</th>
+                    <th class="th-center" colspan="6">Users</th>
                 </tr>
                 <tr>
                     <th>Id</th>

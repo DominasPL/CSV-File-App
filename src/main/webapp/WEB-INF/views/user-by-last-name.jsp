@@ -11,7 +11,7 @@
 <head>
     <title>User by last name</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     <table>
         <thead>
         <tr>
-            <th>Users</th>
+            <th class="th-center" colspan="5">Users</th>
         </tr>
         <tr>
             <th>First name</th>

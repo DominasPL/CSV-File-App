@@ -11,17 +11,22 @@
 <head>
     <title>Main Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <h1>This is main page!</h1>
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <a class="btn btn-success" href="/users/upload-file" role="button">Upload file</a>
-        <a class="btn btn-success" href="/users/number-of-users" role="button">Number of users</a>
-        <a class="btn btn-success" href="/users/users-sorted-by-age" role="button">Users sorted by age</a>
-        <a class="btn btn-success" href="/users/oldest-user-with-phone" role="button">The oldest user with phone number</a>
-        <a class="btn btn-success" href="/users/user-data-by-last-name" role="button">Find user by name</a>
-    </div>
+    <header>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <ul>
+                <li><a class="btn btn-success" href="/users/upload-file" role="button">Upload file</a></li>
+                <li><a class="btn btn-success" href="/users/number-of-users" role="button">Number of users</a></li>
+                <li><a class="btn btn-success" href="/users/users-sorted-by-age" role="button">Users sorted by age</a></li>
+                <li><a class="btn btn-success" href="/users/oldest-user-with-phone" role="button">The oldest user with phone number</a></li>
+                <li><a class="btn btn-success" href="/users/user-data-by-last-name" role="button">Find user by name</a></li>
+            </ul>
+        </div>
+    </header>
+
 
 
 </body>

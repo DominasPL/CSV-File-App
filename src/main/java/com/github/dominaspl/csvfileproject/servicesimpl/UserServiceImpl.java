@@ -149,6 +149,8 @@ public class UserServiceImpl implements UserService {
                 if (split.length > 3 && split[3].matches("\\d{9}") && checkIsPhoneNumberAvailable(split[3])) {
                         userDTO.setPhoneNumber(split[3]);
                 }
+                System.out.println(userDTO.toString());
+                System.out.println(userDTO.getLastName().isEmpty());
                 userRepository.save(UserConverter.convertToUser(userDTO));
             }
         }

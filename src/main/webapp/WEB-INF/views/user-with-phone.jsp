@@ -12,6 +12,7 @@
 <head>
     <title>User</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
 
 </head>
 <body>
@@ -20,13 +21,14 @@
     <table>
         <thead>
         <tr>
-            <th>User</th>
+            <th class="th-center" colspan="5">User</th>
         </tr>
         <tr>
             <th>First name</th>
             <th>Last name</th>
             <th>Age</th>
             <th>Phone number</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +37,7 @@
                 <td>${user.lastName}</td>
                 <td>${user.age}</td>
                 <td>${user.phoneNumber}</td>
+                <td><a href="/users/users-sorted-by-age/delete/${user.userId}">delete</a></td>
             </tr>
         </tbody>
     </table>
