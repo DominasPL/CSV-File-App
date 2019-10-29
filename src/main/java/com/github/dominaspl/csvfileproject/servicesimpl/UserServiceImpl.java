@@ -9,7 +9,9 @@ import com.github.dominaspl.csvfileproject.services.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -28,15 +30,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUsers(String usersStr) {
+    public void addUsers(MultipartFile file) {
 
-        if (usersStr == null) {
-            throw new IllegalArgumentException("Users must be given!");
+        if (file == null) {
+            throw new IllegalArgumentException("File must be given!");
         }
 
-        List<String> userData = new ArrayList<>(Arrays.asList(usersStr.split("\n")));
+       setUsersDataAndSave(convertUserData(convertFileToString(file)));
 
-        setUsersData(userData);
     }
 
     @Override
@@ -112,13 +113,23 @@ public class UserServiceImpl implements UserService {
         return UserConverter.convertToUserDTO(user);
     }
 
-    public LocalDate convertToLocalDate(String date) {
+    private String convertFileToString(MultipartFile file) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.M.d");
-        return LocalDate.parse(date, formatter);
+        String data = "";
+
+        try {
+            data = new String(file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return data;
     }
 
-    public List<String> convertUserData(List<String> userData) {
+
+    private List<String> convertUserData(String data) {
+
+        List<String> userData = new ArrayList<>(Arrays.asList(data.split("\n")));
 
         List<String> filteredData = userData.stream()
                 .skip(1)
@@ -135,33 +146,37 @@ public class UserServiceImpl implements UserService {
         return filteredData;
     }
 
-    public void setUsersData(List<String> filteredData) {
-
+    private void setUsersDataAndSave(List<String> filteredData) {
 
         for (String data : filteredData) {
             String[] split = data.split(";");
             if (split.length > 2 && split[2].matches("\\d{4}\\.\\d{1,2}\\.\\d{1,2}")) {
                 UserDTO userDTO = new UserDTO();
-                userDTO.setFirstName(split[0]);
-                userDTO.setLastName(split[1]);
-                userDTO.setBirthDate(convertToLocalDate(split[2]));
-                userDTO.setAge(AgeConverter.convertBirthToAge(userDTO.getBirthDate()));
-                if (split.length > 3 && split[3].matches("\\d{9}") && checkIsPhoneNumberAvailable(split[3])) {
+                if (!split[0].isEmpty() && !split[1].isEmpty()) {
+                    userDTO.setFirstName(split[0]);
+                    userDTO.setLastName(split[1]);
+                    userDTO.setBirthDate(convertToLocalDate(split[2]));
+                    userDTO.setAge(AgeConverter.convertBirthToAge(userDTO.getBirthDate()));
+                    if (split.length > 3 && split[3].matches("\\d{9}") && checkIsPhoneNumberAvailable(split[3])) {
                         userDTO.setPhoneNumber(split[3]);
+                    }
+                    userRepository.save(UserConverter.convertToUser(userDTO));
                 }
-                System.out.println(userDTO.toString());
-                System.out.println(userDTO.getLastName().isEmpty());
-                userRepository.save(UserConverter.convertToUser(userDTO));
             }
         }
     }
 
-    public boolean checkIsPhoneNumberAvailable(String phoneNumber) {
+    private LocalDate convertToLocalDate(String date) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.M.d");
+        return LocalDate.parse(date, formatter);
+    }
+
+    private boolean checkIsPhoneNumberAvailable(String phoneNumber) {
 
         User user = userRepository.findByPhoneNumber(phoneNumber);
 
         return user == null;
     }
-
 
 }

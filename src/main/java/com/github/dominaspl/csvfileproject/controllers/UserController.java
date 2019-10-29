@@ -1,16 +1,18 @@
 package com.github.dominaspl.csvfileproject.controllers;
 
 import com.github.dominaspl.csvfileproject.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
 @Controller
 @RequestMapping("/users")
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
 
@@ -19,8 +21,8 @@ public class UserController {
     }
 
     @GetMapping("/upload-file")
-    private String displayRegisterForm() {
-
+    private String displayUploadFileForm() {
+        logger.info("Displaying form to upload file");
         return "upload-file";
     }
 
@@ -32,7 +34,7 @@ public class UserController {
         }
 
         if (file.getOriginalFilename().endsWith(".csv")) {
-            userService.addUsers(convertFileToString(file));
+            userService.addUsers(file);
         }
 
         return "redirect:/";
@@ -86,18 +88,7 @@ public class UserController {
     }
 
 
-    public String convertFileToString(MultipartFile file) {
 
-        String data = "";
-
-        try {
-            data = new String(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return data;
-    }
 
 
 }
