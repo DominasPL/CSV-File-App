@@ -11,14 +11,17 @@
 <head>
     <title>Number of users</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="/media/css/style.css">
 </head>
 <body>
 
-    <h1>Number of users</h1>
-    <p>There are: ${numberOfUsers} users added.</p>
+    <jsp:include page="elements/header.jsp"/>
 
-    <a class="btn btn-primary" href="/" role="button">Go back</a>
+    <div class="outPopUp">
+        <h1>Number of users</h1>
+        <p>There are: ${numberOfUsers} users added.</p>
 
+        <a class="btn btn-primary" href="/" role="button">Go back</a>
+    </div>
 </body>
 </html>

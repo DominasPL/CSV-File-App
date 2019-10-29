@@ -11,16 +11,21 @@
 <head>
     <title>User by last name</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/media/css/style.css">
 </head>
 <body>
 
-    <h1>Please provide user last name: </h1>
-    <form method="POST">
-        <input type="text" name="last-name" placeholder="Please give a last name">
-        <input type="submit" value="Submit">
-    </form>
+    <jsp:include page="elements/header.jsp"/>
 
-    <a class="btn btn-primary" href="/" role="button">Go back</a>
+    <div class="outPopUp">
 
+        <h1>Please provide user last name: </h1>
+        <form method="POST">
+            <input type="text" name="last-name" placeholder="Please give a last name">
+            <input type="submit" value="Submit">
+        </form>
+
+        <a class="btn btn-primary" href="/" role="button">Go back</a>
+    </div>
 </body>
 </html>

@@ -2,6 +2,15 @@ th, tr, td {
     border: 1px solid black;
 }
 
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr {
+    background-color: #f2f2f2;
+}
+
 .th-center {
     text-align: center;
 }
@@ -12,3 +21,45 @@ th, tr, td {
     font-family: 'Open Sans', sans-serif;
 }
 
+body {
+    background-image: url("/media/images/1.jpg");
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+ul {
+    float: right;
+    list-style-type: none;
+}
+
+ul, li {
+    display: inline-block;
+}
+
+ul, li, a {
+    padding: 5px 5px;
+}
+
+.logo img {
+    float: left;
+    width: 150px;
+    height: auto;
+}
+
+.outPopUp {
+    position: absolute;
+    width: 400px;
+    height: 100px;
+    z-index: 15;
+    top: 50%;
+    left: 49%;
+    margin: -100px 0 0 -150px;
+    color: white;
+    font-size: 200%;
+    text-align: center;
+}
+
+.img-div {
+    margin-left: 110px;
+}

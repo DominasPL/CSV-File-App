@@ -16,54 +16,55 @@
 
 </head>
 <body>
-
-    <c:choose>
-        <c:when test="${users.totalPages > 0}">
-            <h1>Sorted users by age</h1>
-            <table>
-                <thead>
-                <tr>
-                    <th class="th-center" colspan="6">Users</th>
-                </tr>
-                <tr>
-                    <th>Id</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Age</th>
-                    <th>Phone number</th>
-                    <th>Delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${users.content}" var="user">
+<jsp:include page="elements/header.jsp"/>
+    <div class="outPopUp">
+        <c:choose>
+            <c:when test="${users.totalPages > 0}">
+                <h1>Sorted users by age</h1>
+                <table>
+                    <thead>
                     <tr>
-                        <td>${user.userId}</td>
-                        <td>${user.firstName}</td>
-                        <td>${user.lastName}</td>
-                        <td>${user.age}</td>
-                        <td>${user.phoneNumber}</td>
-                        <td><a class="btn btn-danger" href="/users/users-sorted-by-age/delete/${user.userId}" role="button">Delete</a></td>
+                        <th class="th-center" colspan="6">Users</th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <c:forEach var="i" begin="0" end="${users.totalPages - 1}">
-                        <li class="page-item"><a class="page-link" href="/users/users-sorted-by-age?page=${i}">${i}</a></li>
+                    <tr>
+                        <th>Id</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Age</th>
+                        <th>Phone number</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${users.content}" var="user">
+                        <tr>
+                            <td>${user.userId}</td>
+                            <td>${user.firstName}</td>
+                            <td>${user.lastName}</td>
+                            <td>${user.age}</td>
+                            <td>${user.phoneNumber}</td>
+                            <td><a class="btn btn-danger" href="/users/users-sorted-by-age/delete/${user.userId}" role="button">Delete</a></td>
+                        </tr>
                     </c:forEach>
-                </ul>
-            </nav>
-            <a class="btn btn-danger" href="/users/users-sorted-by-age/delete-users" role="button">Delete all users</a>
-        </c:when>
-        <c:otherwise>
-            <h2>Database is empty!</h2>
-        </c:otherwise>
-    </c:choose>
+                    </tbody>
+                </table>
 
-    <a class="btn btn-primary" href="/" role="button">Go back</a>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <c:forEach var="i" begin="0" end="${users.totalPages - 1}">
+                            <li class="page-item"><a class="page-link" href="/users/users-sorted-by-age?page=${i}">${i}</a></li>
+                        </c:forEach>
+                    </ul>
+                </nav>
+                <a class="btn btn-danger" href="/users/users-sorted-by-age/delete-users" role="button">Delete all users</a>
+            </c:when>
+            <c:otherwise>
+                <h2>Database is empty!</h2>
+            </c:otherwise>
+        </c:choose>
 
+        <a class="btn btn-primary" href="/" role="button">Go back</a>
 
+    </div>
 </body>
 </html>
