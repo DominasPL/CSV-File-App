@@ -6,6 +6,8 @@ import com.github.dominaspl.csvfileproject.dtos.UserDTO;
 import com.github.dominaspl.csvfileproject.entities.User;
 import com.github.dominaspl.csvfileproject.repositories.UserRepository;
 import com.github.dominaspl.csvfileproject.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,8 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     private UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
@@ -33,11 +37,11 @@ public class UserServiceImpl implements UserService {
     public void addUsers(MultipartFile file) {
 
         if (file == null) {
+            logger.error("File has null value");
             throw new IllegalArgumentException("File must be given!");
         }
-
-       setUsersDataAndSave(convertUserData(convertFileToString(file)));
-
+        setUsersDataAndSave(convertUserData(convertFileToString(file)));
+        logger.info("Users have been successfully added");
     }
 
     @Override
@@ -46,6 +50,7 @@ public class UserServiceImpl implements UserService {
         List<User> allUsers = userRepository.findAll();
 
         if (allUsers == null) {
+            logger.error("Users not found");
             throw new IllegalStateException("Users not found!");
         }
 
@@ -58,6 +63,7 @@ public class UserServiceImpl implements UserService {
         Page<User> users = userRepository.findAllAndOrderedByBirthDate(PageRequest.of(page, 5));
 
         if (users == null) {
+            logger.error("Users not found");
             throw new IllegalStateException("Users not found!");
         }
 
@@ -70,6 +76,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findOldestUserAndPhoneNumberIsNotNull();
 
         if (user == null) {
+            logger.error("User not found");
             throw new IllegalStateException("User not found!");
         }
 
@@ -80,12 +87,17 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
 
         if (userId == null) {
+            logger.error("Id has null value");
             throw new IllegalArgumentException("Id must be given!");
         }
 
         Optional<User> optionalUser = userRepository.findById(userId);
-        User user = optionalUser.orElseThrow(() -> new IllegalStateException("User not found"));
+        User user = optionalUser.orElseThrow(() -> {
+            logger.error("User not found");
+            return new IllegalStateException("User not found");
+        });
 
+        logger.info("Deleting user");
         userRepository.delete(user);
     }
 
@@ -94,6 +106,7 @@ public class UserServiceImpl implements UserService {
 
         List<User> users = userRepository.findAll();
         if (!users.isEmpty()) {
+            logger.info("Deleting all users");
             users
                 .forEach(user -> userRepository.delete(user));
         }
@@ -104,11 +117,15 @@ public class UserServiceImpl implements UserService {
     public UserDTO findUserByName(String lastName) {
 
         if (lastName == null) {
+            logger.error("Last name is not given");
             throw new IllegalArgumentException("Last name must be given!");
         }
 
         Optional<User> optionalUser = userRepository.findByLastName(lastName);
-        User user = optionalUser.orElseThrow(() -> new IllegalStateException("User not found"));
+        User user = optionalUser.orElseThrow(() ->  {
+            logger.error("User not found");
+            return new IllegalStateException("User not found");
+        });
 
         return UserConverter.convertToUserDTO(user);
     }
@@ -161,6 +178,7 @@ public class UserServiceImpl implements UserService {
                         userDTO.setPhoneNumber(split[3]);
                     }
                     userRepository.save(UserConverter.convertToUser(userDTO));
+                    logger.info("Adding new user");
                 }
             }
         }

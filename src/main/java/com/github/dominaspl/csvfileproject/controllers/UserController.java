@@ -22,7 +22,6 @@ public class UserController {
 
     @GetMapping("/upload-file")
     private String displayUploadFileForm() {
-        logger.info("Displaying form to upload file");
         return "upload-file";
     }
 
@@ -30,11 +29,14 @@ public class UserController {
     private String addUsersFromGivenFile(@RequestParam("file") MultipartFile file) {
 
         if (file == null) {
+            logger.error("File has null value");
             throw new IllegalArgumentException("File must be given!");
         }
 
         if (file.getOriginalFilename().endsWith(".csv")) {
             userService.addUsers(file);
+        } else {
+            logger.error("Incorrect file given");
         }
 
         return "redirect:/";
@@ -45,7 +47,6 @@ public class UserController {
     public String displayNumberOfUsers(Model model) {
 
         model.addAttribute("numberOfUsers", userService.getAllUsers().size());
-
         return "number-of-users";
     }
 
