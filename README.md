@@ -7,7 +7,7 @@ An application which loads csv file from user, converts data and saves them to d
 ![use1](https://user-images.githubusercontent.com/47396707/67856641-4dd1f080-fb15-11e9-9f1d-1d78e6fa82d9.png)
 
 
-By uploading next file the application adds new users to database. There is option to delete chosen user or all users and posibility to find user by last name. First name, last name and birth date are required fields, phone number is optional should have 9 numbers and be unique.
+By uploading next files the application adds new users to database. There is option to delete chosen user or all users and posibility to find user by last name. First name, last name and birth date are required fields, phone number is optional, should have 9 numbers and be unique.
 
 ## File example 
 ![pngaa](https://user-images.githubusercontent.com/47396707/67855849-8cff4200-fb13-11e9-827f-fabcfc43e97c.png)
