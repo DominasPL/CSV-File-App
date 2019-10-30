@@ -20,6 +20,7 @@ By uploading next files the application adds new users to database. There is opt
 - H2 Database
 - HTML
 - CSS
+- Bootstrap
 - JSP
 - Lombok
 - Tomcat
